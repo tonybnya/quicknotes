@@ -1,5 +1,5 @@
 """
-WSGI config for quicknotes_api project.
+WSGI config for quicknotes project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/
 
 import os
 
-from django.core.wsgi import get_wsgi_application
+from django.core.wsgi import get_wsgi_application # type: ignore
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'quicknotes_api.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'quicknotes.settings')
 
 application = get_wsgi_application()
