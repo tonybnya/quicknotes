@@ -1,10 +1,10 @@
 """
 Script Name : serializers.py
-Description : Describe what this script does
+Description : Serialize the model viewsets
 Author      : @tonybnya
 """
 
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer # type: ignore
 from quicknotes.models import Note
 
 
