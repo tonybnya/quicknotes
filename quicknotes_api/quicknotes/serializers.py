@@ -1,6 +1,6 @@
 """
 Script Name : serializers.py
-Description : Serialize the model viewsets
+Description : Serialize the model viewsets - convert the model to JSON and vice-versa
 Author      : @tonybnya
 """
 
