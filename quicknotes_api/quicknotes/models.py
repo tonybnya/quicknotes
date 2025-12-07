@@ -1,3 +1,9 @@
+"""
+Script Name : models.py
+Description : Definition of the models
+Author      : @tonybnya
+"""
+
 from django.db import models # type: ignore
 
 

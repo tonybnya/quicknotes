@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin # type: ignore
 from django.urls import include, path # type: ignore
 from quicknotes import views
-from rest_framework import routers
+from rest_framework import routers # type: ignore
 
 router = routers.DefaultRouter()
 router.register('notes', views.NoteViewSet)
