@@ -15,11 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin # type: ignore
-from django.urls import path # type: ignore
+from django.urls import include, path # type: ignore
 from quicknotes import views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
+router.register('notes', views.NoteViewSet)
 
 urlpatterns = [
     # admin & homepage
@@ -27,5 +28,5 @@ urlpatterns = [
     path('', views.home, name="home"),
 
     # api
-    path('api/notes', views.notes, name="notes"),
+    path('api/', include(router.urls)),
 ]
