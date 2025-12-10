@@ -7,7 +7,8 @@ Author      : @tonybnya
 from django.http import HttpResponse, JsonResponse # type: ignore
 from rest_framework.viewsets import ModelViewSet # type: ignore
 from rest_framework.response import Response # type: ignore
-from quicknotes.serializers import CollectionSerializer, NoteSerializer
+from rest_framework.decorators import action
+from quicknotes.serializers import CollectionSerializer, CollectionWithNotesSerializer, NoteSerializer
 from .models import Collection, Note
 
 
@@ -43,3 +44,14 @@ class CollectionViewSet(ModelViewSet):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response({"data": serializer.data})
+
+    @action(detail=True, methods=["GET"]) 
+    def notes(self, request, pk=None):
+        # data = Note.objects.filter(collection_id=pk)
+        # serializer = NoteSerializer(data, many=True)
+        collection = Collection.objects.prefetch_related("notes").get(pk=pk)
+        # serializer = CollectionSerializer(collection)
+        # serializer_notes = NoteSerializer(collection.notes, many=True) # type: ignore
+        # return Response({'data': {**dict(serializer.data), 'notes': serializer_notes.data}})
+        serializer = CollectionWithNotesSerializer(collection)
+        return Response({'data': serializer.data})
