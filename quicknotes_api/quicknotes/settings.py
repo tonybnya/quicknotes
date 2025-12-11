@@ -126,7 +126,8 @@ STATIC_URL = 'static/'
 
 # Setting the pagination
 REST_FRAMEWORK = {
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'quicknotes.pagination.CustomPagination',
     'PAGE_SIZE': 10
 }
