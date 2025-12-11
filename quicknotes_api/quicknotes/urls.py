@@ -18,6 +18,7 @@ from django.contrib import admin # type: ignore
 from django.urls import include, path # type: ignore
 from quicknotes import views
 from rest_framework import routers # type: ignore
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 # automatically build the endpoints for the viewsets
 router = routers.DefaultRouter()
@@ -31,4 +32,8 @@ urlpatterns = [
 
     # api
     path('api/', include(router.urls)),
+
+    # auth
+    path('api/auth/login/', TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path('api/auth/refresh/', TokenRefreshView.as_view(), name="token_refresh")
 ]
