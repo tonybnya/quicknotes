@@ -13,6 +13,7 @@
 import { motion } from "motion/react";
 import { memo, useMemo } from "react";
 import { Button } from "../ui/button";
+import logo from  "../../assets/images/logo.svg";
 
 interface Point {
   x: number;
@@ -283,9 +284,11 @@ export default memo(function BackgroundPaths({
           initial={{ opacity: 0 }}
           transition={{ duration: 2 }}
         >
+          <img className="mx-auto" src={logo} alt="svg logo" />
           <AnimatedTitle title={title} />
+          <p className="mb-8 text-white text-2xl font-medium"><span className="text-[#EC4899] font-bold">QuickNotes</span> helps you quickly capture ideas and organize them into clear, simple collections—so you can stay focused and productive.</p>
           <Button>
-            <a href="#" className="bg-[#EC4899] px-4 py-2 rounded-md text-white">Get Started</a>
+            <a href="/quicknotes" className="bg-[#EC4899] px-4 py-2 rounded-md text-white font-bold">Get Started</a>
           </Button>
         </motion.div>
       </div>
