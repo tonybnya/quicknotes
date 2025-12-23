@@ -41,3 +41,19 @@ class CollectionTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Collection.objects.count(), 1)
         self.assertEqual(Collection.objects.first().user, self.user)
+
+    def test_list_collections_user_scoped(self):
+            Collection.objects.create(name="C1", user=self.user)
+            Collection.objects.create(name="C2", user=self.user)
+
+            other_user = User.objects.create_user(
+                username="other",
+                password="password123"
+            )
+            Collection.objects.create(name="Other collection", user=other_user)
+
+            url = reverse("collection-list")
+            response = self.client.get(url)
+
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(len(response.data["data"]), 2)
