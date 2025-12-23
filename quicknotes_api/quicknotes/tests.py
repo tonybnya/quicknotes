@@ -57,3 +57,15 @@ class CollectionTests(APITestCase):
 
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             self.assertEqual(len(response.data["data"]), 2)
+
+    def test_retrieve_collection(self):
+            collection = Collection.objects.create(
+                name="Personal",
+                user=self.user
+            )
+
+            url = reverse("collection-detail", args=[collection.id])
+            response = self.client.get(url)
+
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(response.data["data"]["name"], "Personal")
