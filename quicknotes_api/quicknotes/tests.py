@@ -69,3 +69,31 @@ class CollectionTests(APITestCase):
 
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             self.assertEqual(response.data["data"]["name"], "Personal")
+
+
+class NoteTests(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="user1",
+            password="password123"
+        )
+        self.client.force_authenticate(user=self.user)
+
+        self.collection = Collection.objects.create(
+            name="Default",
+            user=self.user
+        )
+
+    def test_create_note(self):
+        url = reverse("note-list")
+        payload = {
+            "title": "First note",
+            "content": "This is a test note",
+            "collection": self.collection.id
+        }
+
+        response = self.client.post(url, payload, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Note.objects.count(), 1)
+        self.assertEqual(Note.objects.first().user, self.user)
