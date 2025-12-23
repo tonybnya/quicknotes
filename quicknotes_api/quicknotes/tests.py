@@ -152,3 +152,25 @@ class NoteTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['data']), 1)
         self.assertEqual(response.data['data'][0]["title"], "Note A")
+
+    def test_cannot_use_other_users_collection(self):
+            other_user = User.objects.create_user(
+                username="other",
+                password="password123"
+            )
+            other_collection = Collection.objects.create(
+                name="Other collection",
+                user=other_user
+            )
+
+            url = reverse("note-list")
+            payload = {
+                "title": "Invalid note",
+                "content": "Should fail",
+                "collection": other_collection.id
+            }
+
+            response = self.client.post(url, payload, format="json")
+
+            self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+            self.assertIn("collection", response.data)
