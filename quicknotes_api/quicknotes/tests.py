@@ -126,3 +126,29 @@ class NoteTests(APITestCase):
 
             self.assertEqual(response.status_code, status.HTTP_200_OK)
             self.assertEqual(len(response.data['data']), 1)
+
+    def test_filter_notes_by_collection(self):
+        Note.objects.create(
+            title="Note A",
+            content="content",
+            user=self.user,
+            collection=self.collection
+        )
+
+        other_collection = Collection.objects.create(
+            name="Second",
+            user=self.user
+        )
+        Note.objects.create(
+            title="Note B",
+            content="content",
+            user=self.user,
+            collection=other_collection
+        )
+
+        url = reverse("note-list")
+        response = self.client.get(url, {"collection_id": self.collection.id})
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data['data']), 1)
+        self.assertEqual(response.data['data'][0]["title"], "Note A")
