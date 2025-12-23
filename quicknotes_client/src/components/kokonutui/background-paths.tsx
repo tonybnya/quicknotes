@@ -284,11 +284,11 @@ export default memo(function BackgroundPaths({
           initial={{ opacity: 0 }}
           transition={{ duration: 2 }}
         >
-          <img className="mx-auto" src={logo} alt="svg logo" />
+          <div className="w-16 h-16 bg-[#FF2D85] rounded-md mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">Q</div>
           <AnimatedTitle title={title} />
-          <p className="mb-8 text-white text-2xl font-medium"><span className="text-[#EC4899] font-bold">QuickNotes</span> helps you quickly capture ideas and organize them into clear, simple collections—so you can stay focused and productive.</p>
+          <p className="mb-8 text-white text-2xl font-medium"><span className="text-[#FF2D85] font-bold">QuickNotes</span> helps you quickly capture ideas and organize them into clear, simple collections—so you can stay focused and productive.</p>
           <Button>
-            <a href="/quicknotes" className="bg-[#EC4899] px-4 py-2 rounded-md text-white font-bold">Get Started</a>
+            <a href="/quicknotes" className="bg-[#FF2D85] px-4 py-2 rounded-md text-white font-bold">Get Started</a>
           </Button>
         </motion.div>
       </div>
