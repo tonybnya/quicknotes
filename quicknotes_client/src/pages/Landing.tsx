@@ -1,13 +1,11 @@
-// import { Button } from "@/components/ui/button";
-import Hero from "@/components/kokonutui/background-paths";
+import Hero from "@/components/Hero";
 
-const App = () => {
+const Landing = () => {
   return (
-    // <div className="flex min-h-svh flex-col items-center justify-center">
     <div className="min-h-screen">
       <Hero />
     </div>
   )
 }
 
-export default App;
+export default Landing;
