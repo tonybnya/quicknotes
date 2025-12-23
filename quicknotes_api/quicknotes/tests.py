@@ -97,3 +97,32 @@ class NoteTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Note.objects.count(), 1)
         self.assertEqual(Note.objects.first().user, self.user)
+
+    def test_list_notes_user_scoped(self):
+            Note.objects.create(
+                title="Note 1",
+                content="content",
+                user=self.user,
+                collection=self.collection
+            )
+
+            other_user = User.objects.create_user(
+                username="other",
+                password="password123"
+            )
+            other_collection = Collection.objects.create(
+                name="Other",
+                user=other_user
+            )
+            Note.objects.create(
+                title="Other note",
+                content="content",
+                user=other_user,
+                collection=other_collection
+            )
+
+            url = reverse("note-list")
+            response = self.client.get(url)
+
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+            self.assertEqual(len(response.data['data']), 1)
