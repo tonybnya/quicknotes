@@ -4,6 +4,8 @@ import Layout from "@/pages/Layout";
 import Landing from "@/pages/Landing";
 import Quicknotes from "@/pages/Quicknotes";
 import AuthPage from "@/pages/AuthPage";
+import FeaturesPage from "@/pages/Features";
+import ApiDocs from "@/pages/ApiDocs";
 
 import NotFoundPage from "@/pages/NotFoundPage";
 
@@ -12,20 +14,14 @@ const App = () => {
   return (
     <BrowserRouter>
         <Routes>
-            {/* <Route path="/" element={<Layout />}>
-            <Route index element={<Landing />} />
-            <Route path="accueil" element={<Landing />} />
-            <Route path="quicknotes" element={<Quicknotes />} />
-            </Route>
-
-            <Route path="*" element={<NotFoundPage />} /> */}
-
           {/* Main Website Routes */}
           <Route path="/" element={<Layout />}>
             <Route index element={<Landing />} />
             <Route path="accueil" element={<Landing />} />
             <Route path="login" element={<AuthPage />} />
             <Route path="register" element={<AuthPage />} />
+            <Route path="features" element={<FeaturesPage />} />
+            <Route path="docs" element={<ApiDocs />} />
           </Route>
 
           {/* Dashboard/App Routes */}
